@@ -1,6 +1,6 @@
-#include <iostream>
-#include <sys/time.h>
-
+#include "stdio.h"
+#include "sys/time.h"
+#include "string.h"
 
 struct Transaction {
     int id;
@@ -18,7 +18,18 @@ struct Block {
 
 struct Block block;
 
-int main() {
+/**
+ * º¯ÊıÉùÃ÷
+ * @param block
+ */
+void printBlock(struct Block block);
+
+void printBlock(struct Block block){
+    printf("%d %s", block.timestamp, block.transactions[0].info);
+}
+
+int main()
+{
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
@@ -28,11 +39,11 @@ int main() {
     block.timestamp = tv.tv_sec;
     block.nonce = 1;
     block.transactions[0].id = 1;
-    strcpy(block.transactions[0].info, "å…±è¯†æœºåˆ¶ç”Ÿæˆçš„åŒºå—");
+    strcpy(block.transactions[0].info, "¹²Ê¶»úÖÆÉú³ÉµÄÇø¿é");
     block.transactions[1].id = 2;
-    strcpy(block.transactions[1].info, "åŒºå—é“¾é«˜åº¦ä¸º2");
+    strcpy(block.transactions[1].info, "Çø¿éÁ´¸ß¶ÈÎª2");
 
-    printf("%d %s", block.timestamp, block.transactions[1].info);
+    printBlock(block);
 
     return 0;
 }
