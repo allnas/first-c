@@ -30,5 +30,5 @@ struct Block block;
 void printBlock(struct Block block);
 
 void printBlock(struct Block block){
-    printf("%ld %s", block.timestamp, block.transactions[0].info);
+    printf("%ld %s\n", block.timestamp, block.transactions[0].info);
 }
