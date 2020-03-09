@@ -6,7 +6,7 @@
 typedef struct {
     int id;
     char info[32];
-} Transaction;
+} Transaction2;
 
 typedef struct {
     int index;
@@ -14,11 +14,14 @@ typedef struct {
     char previous_hash[64];
     long timestamp;
     int nonce;
-    Transaction transactions[2];
-} Block;
+    Transaction2 transactions[2];
+} Block2;
 
-int block_show()
-{
+void printBlock(struct Block block) {
+    printf("%d %s\n", block.index, block.transactions[0].info);
+}
+
+int block_show() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
@@ -28,9 +31,7 @@ int block_show()
     block.timestamp = tv.tv_sec;
     block.nonce = 1;
     block.transactions[0].id = 1;
-    block.transactions[0].info= "¹²Ê¶»úÖÆÉú³ÉµÄÇø¿é";
-    block.transactions[1].id = 2;
-    block.transactions[1].info= "Çø¿éÁ´¸ß¶ÈÎª2";
+    block.transactions[0].info = "å…±è¯†æœºåˆ¶ç”Ÿæˆçš„åŒºå—";
 
     printBlock(block);
 
@@ -43,18 +44,29 @@ int main() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
-    Block block = {
-            .index = 1,
+    struct Block block = {
+            .index = 2,
             .hash = "00c01b629d0d0fba452a0a632945f1f0fd1dd92a864d102112f8ccde3eaf516b",
             .previous_hash = "00ced8f1a7407460521d279364db6d48ccb8aa3ad839ea08220d7e8347d276ef",
             .timestamp = tv.tv_sec,
             .nonce = 1,
             .transactions[0].id = 1,
-            .transactions[0].info = "¹²Ê¶»úÖÆÉú³ÉµÄÇø¿é",
-            .transactions[1].id = 1,
-            .transactions[1].info = "Çø¿éÁ´¸ß¶ÈÎª2",
+            .transactions[0].info = "å…±è¯†æœºåˆ¶ç”Ÿæˆçš„åŒºå—",
     };
-    printf("%ld %s", block.timestamp, block.transactions[1].info);
+    printf("%ld %s\n", block.timestamp, block.transactions[0].info);
+
+    Block2 block2 = {
+            .index = 3,
+            .hash = "00c01b629d0d0fba452a0a632945f1f0fd1dd92a864d102112f8ccde3eaf516b",
+            .previous_hash = "00ced8f1a7407460521d279364db6d48ccb8aa3ad839ea08220d7e8347d276ef",
+            .timestamp = tv.tv_sec,
+            .nonce = 1,
+            .transactions[0].id = 1,
+            .transactions[0].info = "å…±è¯†æœºåˆ¶ç”Ÿæˆçš„åŒºå—",
+            .transactions[1].id = 1,
+            .transactions[1].info = "åŒºå—é“¾é«˜åº¦ä¸º2",
+    };
+    printf("%ld %s", block2.timestamp, block2.transactions[1].info);
 
     return 0;
 }
