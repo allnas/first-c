@@ -3,6 +3,8 @@
 #include <sys/time.h>
 #include "block.h"
 
+#define BLOCK_SIZE 2
+
 typedef struct {
     int id;
     char info[32];
@@ -14,7 +16,7 @@ typedef struct {
     char previous_hash[64];
     long timestamp;
     int nonce;
-    Transaction2 transactions[2];
+    Transaction2 transactions[BLOCK_SIZE];
 } Block2;
 
 void printBlock(struct Block block) {
