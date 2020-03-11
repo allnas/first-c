@@ -19,6 +19,15 @@ typedef struct {
     Transaction2 transactions[BLOCK_SIZE];
 } Block2;
 
+struct dynamicArray {
+    //表示数组实际长度
+    int size;
+    //表示数组的最大长度
+    int capicity;
+    //接收用户输入的值的首地址的指针
+    int *ptr;
+};
+
 void printBlock(struct Block block) {
     printf("%d %s\n", block.index, block.transactions[0].info);
 }
@@ -36,15 +45,6 @@ int block_show() {
     block.transactions[0].info = "共识机制生成的区块";
 
     printBlock(block);
-
-    return 0;
-}
-
-int main() {
-    block_show();
-
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
 
     struct Block block = {
             .index = 2,
@@ -68,7 +68,13 @@ int main() {
             .transactions[1].id = 1,
             .transactions[1].info = "区块链高度为2",
     };
-    printf("%ld %s", block2.timestamp, block2.transactions[1].info);
+    printf("%ld %s\n", block2.timestamp, block2.transactions[1].info);
+
+    return 0;
+}
+
+int main() {
+    block_show();
 
     return 0;
 }
